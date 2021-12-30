@@ -1,0 +1,41 @@
+.navBar {
+  width: 100%;
+  background-color: #fd91fd;
+  padding: 15px 0;
+  height: 60px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.navBar h2 {
+  font-size: 2rem;
+  color: #222;
+}
+
+.navBar span {
+  font-size: 2rem;
+  color: #222;
+  display: inline-block;
+  width: 200px;
+  padding: 10px;
+  border-radius: 15px;
+  background-color: #6c28d9a9;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.navBar span > p {
+  width: 40px;
+  height: 40px;
+  margin: 5px;
+  color: #6c28d9a9;
+  background-color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
