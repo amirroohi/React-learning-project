@@ -1,13 +1,13 @@
 import React, { useContext, useReducer, useState } from "react";
-
+import { HumanData } from "../DB/Humans";
 export const ProductContext = React.createContext();
 export const ProductContextDispatcher = React.createContext();
 
-const initialState = [
-  { name: "amir", age: "22", id: "1", quantity: "1" },
-  { name: "shahram", age: "44", id: "2", quantity: "1" },
-  { name: "bahram", age: "50", id: "3", quantity: "1" },
-];
+// const initialState = [
+//   { name: "amir", age: "22", id: "1", quantity: "1" },
+//   { name: "shahram", age: "44", id: "2", quantity: "1" },
+//   { name: "bahram", age: "50", id: "3", quantity: "1" },
+// ];
 const reducer = (state, action) => {
   switch (action.type) {
     case "increment": {
@@ -44,13 +44,23 @@ const reducer = (state, action) => {
       const filteredHumans = state.filter((h) => h.id !== action.id);
       return filteredHumans;
     }
+    case "filter": {
+      if (action.event.target.value === "") return HumanData;
+      else {
+        console.log(action.event.target.value);
+        const humanSizeFiltered = HumanData.filter(
+          (human) => human.size.indexOf(action.event.target.value) >= 0
+        );
+        return humanSizeFiltered;
+      }
+    }
     default:
       return state;
   }
 };
 
 const ProductsProvider = ({ children }) => {
-  const [product, dispatch] = useReducer(reducer, initialState);
+  const [product, dispatch] = useReducer(reducer, HumanData);
 
   return (
     <ProductContext.Provider value={product}>

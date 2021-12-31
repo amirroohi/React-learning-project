@@ -1,7 +1,6 @@
 import styles from "./Product.module.css";
-import React, { Component } from "react";
+import React from "react";
 import { BiTrash } from "react-icons/bi";
-import { useEffect } from "react";
 
 const Product = ({ human, onDecrement, onIncrement, changeName, onDelete }) => {
  
@@ -27,12 +26,12 @@ const Product = ({ human, onDecrement, onIncrement, changeName, onDelete }) => {
           +
         </button>
       </div>
-      <input
+      {/* <input
         type="text"
         className={styles.inputName}
         onChange={changeName}
         value={human.name}
-      />
+      /> */}
       <button className={styles.button} onClick={onDelete}>
         Delete
       </button>
