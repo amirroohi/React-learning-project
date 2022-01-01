@@ -1,5 +1,7 @@
 import React, { useContext, useReducer, useState } from "react";
 import { HumanData } from "../DB/Humans";
+import _ from "lodash";
+
 export const ProductContext = React.createContext();
 export const ProductContextDispatcher = React.createContext();
 
@@ -45,13 +47,24 @@ const reducer = (state, action) => {
       return filteredHumans;
     }
     case "filter": {
-      if (action.event.target.value === "") return HumanData;
+      const value = action.seletedOption.value;
+      if (value === "") return HumanData;
       else {
-        console.log(action.event.target.value);
+        console.log(value);
         const humanSizeFiltered = HumanData.filter(
-          (human) => human.size.indexOf(action.event.target.value) >= 0
+          (human) => human.size.indexOf(value) >= 0
         );
         return humanSizeFiltered;
+      }
+    }
+    case "sort": {
+      const value = action.seletedOption.value;
+      console.log(value);
+      const humans = [...state];
+      if (value === "lowest") {
+        return _.orderBy(humans, ['age'],['asc']);
+      } else {
+        return _.orderBy(humans, ['age'],['desc']);
       }
     }
     default:
@@ -123,3 +136,25 @@ export const useProductsActions = () => {
   //   removeHandler,
   // };
 };
+
+// const lowToHigh = humans.sort((a, b) => {
+//   if (a.age < b.age) {
+//     return 1;
+//   }
+//   if (a.age > b.age) {
+//     return -1;
+//   }
+//   return 0;
+// });
+// return lowToHigh;
+
+// const highToLow = humans.sort((a, b) => {
+//   if (a.age > b.age) {
+//     return 1;
+//   }
+//   if (a.age < b.age) {
+//     return -1;
+//   }
+//   return 0;
+// });
+// return highToLow;
