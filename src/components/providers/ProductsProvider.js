@@ -67,6 +67,16 @@ const reducer = (state, action) => {
         return _.orderBy(humans, ['age'],['desc']);
       }
     }
+    case "search": {
+      const value = action.searchEvent.target.value;
+      if (value === "") return state;
+      else {
+        const humanSearch = state.filter(
+          (human) => human.name.toLowerCase().includes(value.toLowerCase())
+        );
+        return humanSearch;
+      }
+    }
     default:
       return state;
   }

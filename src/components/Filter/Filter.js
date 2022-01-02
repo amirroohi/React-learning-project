@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useProductsActions } from "../providers/ProductsProvider";
-import Select from "react-select";
 import styles from "./filter.module.css";
-const options = [
+import SelectComponent from "../../common/Select/Select";
+import Search from "../../common/Search/Search";
+const filterOptions = [
   { value: "", label: "All" },
   { value: "S", label: "S" },
   { value: "M", label: "M" },
@@ -14,42 +15,40 @@ const options = [
 const sortOptions = [
   { value: "highest", label: "highest" },
   { value: "lowest", label: "lowest" },
-
 ];
 const Filter = () => {
   const dispatch = useProductsActions();
-  const [value, setValue] = useState("");
+  const [filter, setFilter] = useState("");
   const [sort, setSort] = useState("");
   const changeSizehandler = (seletedOption) => {
     dispatch({ type: "filter", seletedOption });
-    dispatch({ type: "sort", seletedOption:sort });
-    setValue(seletedOption);
+    dispatch({ type: "sort", seletedOption: sort });
+    setFilter(seletedOption);
   };
   const sortAgeHandler = (seletedOption) => {
     dispatch({ type: "sort", seletedOption });
-    dispatch({ type: "filter", seletedOption:value });
+    // dispatch({ type: "filter", seletedOption:value });
     setSort(seletedOption);
   };
   return (
-    <div className={styles.filter}>
-      <p>filter users by:</p>
-      <div className={styles.selectContainer}>
-        <Select
-          value={value}
+    <section>
+      <Search filter={filter} />
+      <div className={styles.filter}>
+        <p>filter users by:</p>
+        <SelectComponent
+          value={filter}
           onChange={changeSizehandler}
-          options={options}
-          className={styles.select}
+          options={filterOptions}
+          title="sort by size:"
         />
-      </div>
-      <div className={styles.selectContainer}>
-        <Select
+        <SelectComponent
           value={sort}
           onChange={sortAgeHandler}
           options={sortOptions}
-          className={styles.select}
+          title="sort by age:"
         />
       </div>
-    </div>
+    </section>
   );
 };
 

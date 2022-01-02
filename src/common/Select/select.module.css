@@ -1,0 +1,17 @@
+
+.select{
+    display: block;
+    width: 200px;
+}
+
+.selectContainer{
+    width: 300px;
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+}
+    
+.selectContainer p{
+    display: block;
+    margin-right: 5px;
+}
